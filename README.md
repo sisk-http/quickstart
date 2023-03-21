@@ -22,7 +22,7 @@ You'll need to have [.NET 7 SDK](https://dotnet.microsoft.com/en-us/download/dot
 
 # Documentation
 
-You can access the Sisk documentation [here](https://sisk-http.github.io/docs/static/#/) or access it's repository [here](https://github.com/sisk-http/docs).
+You can access the Sisk documentation [here](https://sisk.proj.pw/) or access it's repository [here](https://github.com/sisk-http/docs).
 
 # License
 
