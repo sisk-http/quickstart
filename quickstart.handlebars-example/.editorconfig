@@ -1,0 +1,8 @@
+# All files
+[*]
+indent_style = space
+
+# Hbs files
+[*.hbs]
+indent_size = 4
+charset = utf-8

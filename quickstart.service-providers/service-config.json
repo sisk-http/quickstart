@@ -1,0 +1,17 @@
+﻿{
+  "Server": {
+    "DefaultEncoding": "UTF-8",
+    "ThrowExceptions": true,
+    "IncludeRequestIdHeader": true
+  },
+  "ListeningHost": {
+    "Label": "My sisk application",
+    "Ports": [
+      "http://localhost:5555/"
+    ],
+    "CrossOriginResourceSharingPolicy": { },
+    "Parameters": {
+      "name": "Sisk world"
+    }
+  }
+}

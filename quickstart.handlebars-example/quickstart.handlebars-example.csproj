@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+        <RootNamespace>quickstart.handlebars_example</RootNamespace>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="View\**\*.hbs" />
+        <EmbeddedResource Include="Assets\**\*" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Handlebars.Net" Version="2.1.4" />
+        <PackageReference Include="Sisk.HttpServer" Version="0.15.0.46-beta" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EditorConfigFiles Remove=".\.editorconfig" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include=".\.editorconfig" />
+    </ItemGroup>
+
+</Project>

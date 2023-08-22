@@ -1,0 +1,25 @@
+﻿*, *::before, *::after {
+    font-family: 'Trebuchet MS', 'Lucida Sans', sans-serif;
+}
+
+body {
+    margin: 0;
+    position: relative;
+    background: #2e3440;
+}
+
+main {
+    position: absolute;
+    background: white;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    height: auto;
+    transform: translateX(-50%) translateY(-50%);
+    border-radius: 8px;
+    padding: 40px;
+}
+
+main > h1 {
+    color: #052283;
+}

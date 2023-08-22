@@ -1,24 +1,15 @@
-# Sisk web framework
+# Sisk quickstart projects 🚀
 
-This quickstart shows an example of how to have your Sisk server running in just a few steps. To start coding in your project:
+This quickstart repository shows an example of how to have your Sisk server running in just a few steps. To start coding in your project:
 
-```bash
-# clone the project
-git clone https://github.com/sisk-http/quickstart
+Projects in this repo are described by:
+- **quickstart.service-providers**: example project using Sisk.ServiceProviders package, which adds portability to your Sisk service.
+- **quickstart.minimal-hello**: simplest Hello World program with Sisk.
+- **quickstart.handlebars-example**: simple Sisk program with UI-templating made by [Handlebars.Net](https://github.com/Handlebars-Net/Handlebars.Net).
+- **net8-aot-example**: Native AOT with .NET 8.0 example.
+- **bflat-example**: Sisk compiled with the [bflat compiler](https://github.com/bflattened/bflat) example.
 
-# run dotnet
-cd quickstart
-dotnet watch
-```
-
-And then you should see something like:
-
-```
-dotnet watch 🚀 Started
-Service Sisk quickstart is listening at http://localhost:5555/
-```
-
-You'll need to have [.NET 7 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/7.0) installed in your machine.
+You'll need to have [.NET SDK](https://dotnet.microsoft.com/en-us/download/dotnet/) installed in your machine for projects which uses .NET. `bflat-example` doens't need .NET installed in your machine.
 
 # Documentation
 
