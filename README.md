@@ -6,6 +6,7 @@ Projects in this repo are described by:
 - **quickstart.service-providers**: example project using Sisk.ServiceProviders package, which adds portability to your Sisk service.
 - **quickstart.minimal-hello**: simplest Hello World program with Sisk.
 - **quickstart.handlebars-example**: simple Sisk program with UI-templating made by [Handlebars.Net](https://github.com/Handlebars-Net/Handlebars.Net).
+- **quickstart.simple-file-server**: simple file server which serves static content with directory listing.
 - **net8-aot-example**: Native AOT with .NET 8.0 example.
 - **bflat-example**: Sisk compiled with the [bflat compiler](https://github.com/bflattened/bflat) example.
 
