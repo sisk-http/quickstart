@@ -7,15 +7,16 @@ class Program
 {
     static void Main(string[] args)
     {
-        var server = HttpServer.Emit(0, out HttpServerConfiguration config, out ListeningHost host, out Router router);
-        config.AccessLogsStream = null;
+        using var host = HttpServer.CreateBuilder()
+            .UseListeningPort(5523)
+            .Build();
 
-        router += new Route(RouteMethod.Get, "/", request => new HttpResponse().WithContent("Hello, world!"));
+        host.Router.SetRoute(RouteMethod.Get, "/", request =>
+        {
+            return new HttpResponse()
+                .WithContent(new HtmlContent("<h1>Hello, world!</h1>"));
+        });
 
-        server.Start();
-
-        Console.WriteLine($"The Sisk HTTP server is listening at {server.ListeningPrefixes[0]}");
-
-        Thread.Sleep(-1);
+        host.Start();
     }
 }

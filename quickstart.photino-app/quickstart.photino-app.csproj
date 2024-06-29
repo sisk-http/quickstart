@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net8.0</TargetFramework>
+		<RootNamespace>quickstart.photino_app</RootNamespace>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="wwwroot\assets\app.css" />
+		<None Remove="wwwroot\index.html" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="wwwroot\**\*" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Photino.NET" Version="3.0.14" />
+		<PackageReference Include="Sisk.HttpServer" Version="1.0.0-rc2" />
+	</ItemGroup>
+
+</Project>

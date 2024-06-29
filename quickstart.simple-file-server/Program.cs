@@ -1,16 +1,22 @@
 ﻿using Sisk.Core.Http;
 using Sisk.Core.Routing;
 using System.Text;
+using System.Web;
 
 namespace quickstart.simple_file_server;
 
 class Program
 {
-    public const int LISTENING_PORT = 5555;
-    public const string DIRECTORY_ROOT = "C:\\wwwroot";
-    public const string TRY_FILE = "index.html";
-    public const bool DIRECTORY_LISTING = true;
-    public const string DEFAULT_MIME_TYPE = "application/octet-stream";
+    public const int
+        LISTENING_PORT = 5555;
+    public const string
+        DIRECTORY_ROOT = "./wwwroot";
+    public const string
+        TRY_FILE = "index.html";
+    public const bool
+        ALLOW_DIRECTORY_LISTING = true;
+    public const string
+        DEFAULT_MIME_TYPE = "application/octet-stream";
 
     public static readonly Dictionary<string, string> MimeTypes = new()
     {
@@ -25,43 +31,25 @@ class Program
 
     static void Main(string[] args)
     {
-        Router router = new Router();
-        Route route = new Route(RouteMethod.Any, ".*", Serve);
-        route.UseRegex = true;
-        route.UseCors = true;
-        router.SetRoute(route);
+        using var host = HttpServer.CreateBuilder()
+            .UseListeningPort(LISTENING_PORT)
+            .UseCors(Sisk.Core.Entity.CrossOriginResourceSharingHeaders.CreatePublicContext())
+            .UseConfiguration(config =>
+            {
+                config.AccessLogsStream = LogStream.ConsoleOutput;
+            })
+            .UseRouter(router =>
+            {
+                router.SetRoute(RouteMethod.Any, Route.AnyPath, Serve);
+            })
+            .Build();
 
-        ListeningPort lp = new ListeningPort()
-        {
-            Hostname = "localhost",
-            Secure = false,
-            Port = LISTENING_PORT
-        };
-
-        ListeningHost host = new ListeningHost();
-        host.Ports = new ListeningPort[] { lp };
-        host.Router = router;
-        host.CrossOriginResourceSharingPolicy = new()
-        {
-            AllowOrigin = "*",
-            AllowHeaders = new[] { "*" },
-            AllowMethods = new[] { "GET", "POST", "PUT", "PATCH" }
-        };
-
-        HttpServerConfiguration configuration = new HttpServerConfiguration();
-        configuration.ListeningHosts.Add(host);
-
-        HttpServer server = new HttpServer(configuration);
-        server.Start();
-
-        Console.WriteLine("Simple HTTP file server is listening at {0}", server.ListeningPrefixes[0]);
-
-        Thread.Sleep(-1);
+        host.Start();
     }
 
     static HttpResponse Serve(HttpRequest request)
     {
-        string path = request.Path;
+        string path = HttpUtility.UrlDecode(request.Path);
         string realpath = NormalizedCombine(DIRECTORY_ROOT, path);
         string tryfilePath = NormalizedCombine(realpath, TRY_FILE);
 
@@ -105,7 +93,7 @@ class Program
         }
         else //if (isDir)
         {
-            if (!DIRECTORY_LISTING)
+            if (!ALLOW_DIRECTORY_LISTING)
                 return new(403);
 
             StringBuilder content = new StringBuilder();
