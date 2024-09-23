@@ -1,16 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>quickstart.crud_api</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CypherPotato.LightJson" Version="0.8.0" />
-    <PackageReference Include="Sisk.HttpServer" Version="0.16.2" />
+    <PackageReference Include="CypherPotato.LightJson" Version="0.10.1" />
+    <PackageReference Include="Sisk.HttpServer" Version="1.1.0" />
   </ItemGroup>
 
 </Project>

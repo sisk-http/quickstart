@@ -1,15 +1,14 @@
 ﻿using LightJson;
 using Sisk.Core.Http;
 using Sisk.Core.Routing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace quickstart.crud_api;
 
-public abstract class JsonApiController<TModel> : RouterModule
+public abstract class JsonApiController : RouterModule
+{
+}
+
+public abstract class JsonApiController<TModel> : JsonApiController where TModel : notnull
 {
     public abstract Task<TModel?> Get(Guid id);
     public abstract Task<IEnumerable<TModel>> List();
@@ -18,8 +17,8 @@ public abstract class JsonApiController<TModel> : RouterModule
     [RouteGet()]
     public async Task<HttpResponse> GetAll(HttpRequest request)
     {
-        var items = await List();
-        return Ok(null, items);
+        var items = await this.List();
+        return this.Ok(null, items);
     }
 
     [RouteGet("<id>")]
@@ -27,14 +26,14 @@ public abstract class JsonApiController<TModel> : RouterModule
     {
         Guid id = request.Query["id"].GetGuid();
 
-        var model = await Get(id);
+        var model = await this.Get(id);
 
         if (model is null)
         {
-            return NotFound();
+            return this.NotFound();
         }
 
-        return Ok(null, model);
+        return this.Ok(null, model);
     }
 
     [RoutePost()]
@@ -43,15 +42,15 @@ public abstract class JsonApiController<TModel> : RouterModule
         string requestBody = request.Body;
 
         TModel modelBody = JsonValue.Deserialize(requestBody).Get<TModel>();
-        var state = await Create(modelBody);
+        var state = await this.Create(modelBody);
 
         if (state is Guid id)
         {
-            return Ok("Model added successfully.", new { id });
+            return this.Ok("Model added successfully.", new { id });
         }
         else
         {
-            return BadRequest("Couldn't create the model.");
+            return this.BadRequest("Couldn't create the model.");
         }
     }
 

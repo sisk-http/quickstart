@@ -1,19 +1,16 @@
 ﻿using quickstart.crud_api;
-using quickstart.crud_api.Controller;
 using quickstart.crud_api.Model;
 using Sisk.Core.Http;
 using System.Text;
 
-LightJson.JsonOptions.Default.Converters.Add(new Blog.JsonBlogConverter());
-LightJson.JsonOptions.Default.Converters.Add(new Post.JsonPostConverter());
-LightJson.JsonOptions.Default.PropertyNameCaseInsensitive = true;
+LightJson.JsonOptions.Default.PropertyNameComparer = StringComparer.CurrentCultureIgnoreCase;
 
-var appHost = HttpServer.CreateBuilder(host =>
+var appBuilder = HttpServer.CreateBuilder(host =>
 {
     host.UseListeningPort(9500);
     host.UseRouter(router =>
     {
-        router.SetObject(new BlogController());
+        router.AutoScanModules<JsonApiController>();
         router.CallbackErrorHandler = (ex, r) =>
         {
             return CreateJsonResponse(false, ex.Message, null).WithStatus(403);
@@ -21,7 +18,7 @@ var appHost = HttpServer.CreateBuilder(host =>
     });
 });
 
-appHost.Start();
+appBuilder.Build().Start();
 
 partial class Program
 {
